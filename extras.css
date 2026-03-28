@@ -387,4 +387,36 @@
   .bar-wrap { width: 100%; }
 }
 
+/* --- MAGNETIC BUTTON INTERACTION --- */
+.mag-btn {
+    display: inline-block;
+    transition: transform 0.2s ease-out;
+}
 
+/* --- SCRAMBLE TEXT ADAPTATION --- */
+.scramble {
+    display: inline-block;
+    min-height: 1em;
+    font-family: var(--font-head);
+}
+
+/* --- HUD MISSION PROGRESS BAR --- */
+.mission-hud {
+    position: fixed;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 150px;
+    background: rgba(255,255,255,0.1);
+    z-index: 100;
+    border-radius: 10px;
+}
+.hud-fill {
+    width: 100%;
+    height: 0%; /* Updated via Scroll JS */
+    background: var(--clr-cyan);
+    box-shadow: 0 0 15px var(--clr-cyan);
+    border-radius: 10px;
+    transition: height 0.3s ease-out;
+}
