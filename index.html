@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Veloxar – An immersive interactive journey from Earth to Mars. Experience launch, deep space travel, orbital approach, landing, and surface exploration." />
+  <meta name="theme-color" content="#00000a" />
+  <title>VELOXAR – Journey to Mars</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="extras.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+<body>
+
+<!-- ─── Custom Cursor ─────────────────────────────── -->
+<div class="cursor"       aria-hidden="true"></div>
+<div class="cursor-ring"  aria-hidden="true"></div>
+
+<!-- ─── Scanline overlay ─────────────────────────── -->
+<div class="scanlines" aria-hidden="true"></div>
+
+<!-- ─── Nebula atmosphere ────────────────────────── -->
+<div class="nebula nebula-1" aria-hidden="true"></div>
+<div class="nebula nebula-2" aria-hidden="true"></div>
+<div class="nebula nebula-3" aria-hidden="true"></div>
+
+<!-- ─── Three.js background canvas ──────────────── -->
+<canvas id="three-canvas" aria-hidden="true"></canvas>
+
+<!-- ─────────────────────────────────────────────────
+     LOADING SCREEN
+───────────────────────────────────────────────── -->
+<div id="loader" role="status" aria-label="Loading Veloxar">
+  <div class="star-burst" aria-hidden="true"></div>
+  <div class="loader-logo" aria-hidden="true">VELOXAR</div>
+  <div class="loader-bar-wrap">
+    <div class="loader-bar"></div>
+  </div>
+  <div class="loader-pct" aria-live="polite">0%</div>
+  <div class="loader-status" aria-live="polite">Initialising systems…</div>
+</div>
+
+<!-- ─────────────────────────────────────────────────
+     NAVIGATION
+───────────────────────────────────────────────── -->
+<nav role="navigation" aria-label="Main navigation">
+  <a href="#hero" class="nav-logo" aria-label="Veloxar home">VELOXAR</a>
+  <ul class="nav-links" role="list">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#launch">Launch</a></li>
+    <li><a href="#deep-space">Deep Space</a></li>
+    <li><a href="#mars-approach">Mars</a></li>
+    <li><a href="#landing">Landing</a></li>
+    <li><a href="#exploration">Explore</a></li>
+    <li><a href="#missions">Missions</a></li>
+    <li><a href="#analytics">Analytics</a></li>
+  </ul>
+  <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+
+<!-- ═════════════════════════════════════════════════
+     SECTION 1 — HERO
+═════════════════════════════════════════════════ -->
+<section id="hero" class="section" aria-label="Hero – Veloxar Mission">
+  <p class="hero-eyebrow">Mission Year 2027 · Sol 1 · Launch Sequence Initiated</p>
+
+  <h1 class="hero-title">VELOXAR</h1>
+
+  <p class="hero-subtitle">
+    A 55-million-kilometre odyssey through the void.<br />
+    Humanity's greatest journey — begins now.
+  </p>
+
+  <!-- Mission countdown -->
+  <div class="hero-countdown" role="timer" aria-label="Mission launch countdown">
+    <div class="countdown-unit">
+      <span class="countdown-num" id="cd-days">365</span>
+      <span class="countdown-label">Days</span>
+    </div>
+    <span class="countdown-sep" aria-hidden="true">:</span>
+    <div class="countdown-unit">
+      <span class="countdown-num" id="cd-hrs">00</span>
+      <span class="countdown-label">Hours</span>
+    </div>
+    <span class="countdown-sep" aria-hidden="true">:</span>
+    <div class="countdown-unit">
+      <span class="countdown-num" id="cd-min">00</span>
+      <span class="countdown-label">Mins</span>
+    </div>
+    <span class="countdown-sep" aria-hidden="true">:</span>
+    <div class="countdown-unit">
+      <span class="countdown-num" id="cd-sec">00</span>
+      <span class="countdown-label">Secs</span>
+    </div>
+  </div>
+
+  <div class="hero-cta">
+    <a href="#launch" class="btn-primary" aria-label="Begin the journey">
+      <span>Begin Journey</span>
+    </a>
+    <a href="#exploration" class="btn-ghost" aria-label="Explore Mars surface">
+      Explore Mars
+    </a>
+  </div>
+
+  <div class="scroll-hint" aria-hidden="true">
+    <div class="scroll-mouse"></div>
+    <span>Scroll to launch</span>
+  </div>
+</section>
+
+<!-- ═════════════════════════════════════════════════
+     SECTION 2 — LAUNCH
+═════════════════════════════════════════════════ -->
+<section id="launch" class="section" aria-label="Launch – Leaving Earth">
+  <div class="launch-grid container">
+
+    <!-- Text -->
+    <div class="launch-text">
+      <span class="section-label reveal-left">Phase 01 — Launch</span>
+      <h2 class="section-title reveal-left">
+        Escaping Earth's<br /><span>Gravity Well</span>
+      </h2>
+      <p class="section-body reveal-left">
+        At T+0, the Veloxar spacecraft's Merlin Vacuum engines ignite with
+        7,600 kN of thrust. Within 8 minutes and 30 seconds, the crew
+        pierces the Kármán line at 100 km, leaving Earth's atmosphere
+        forever behind. The journey to the Red Planet has begun.
+      </p>
+
+      <!-- Flip stat cards – INTERACTIVE ELEMENT 1 -->
+      <div class="mission-stats" aria-label="Mission statistics">
+        <article class="stat-card" aria-label="Thrust stat">
+          <div class="stat-card-inner">
+            <div class="stat-front">
+              <span class="stat-val">7,600</span>
+              <span class="stat-unit">kN</span>
+              <span class="stat-label">Total Thrust</span>
+            </div>
+            <div class="stat-back">
+              <p class="stat-desc">Combined thrust of all 9 Merlin engines at sea level during lift-off.</p>
+            </div>
+          </div>
+        </article>
+        <article class="stat-card" aria-label="Travel time stat">
+          <div class="stat-card-inner">
+            <div class="stat-front">
+              <span class="stat-val">259</span>
+              <span class="stat-unit">days</span>
+              <span class="stat-label">Travel Time</span>
+            </div>
+            <div class="stat-back">
+              <p class="stat-desc">Optimal Hohmann transfer orbit from Earth to Mars during 2027 window.</p>
+            </div>
+          </div>
+        </article>
+        <article class="stat-card" aria-label="Distance stat">
+          <div class="stat-card-inner">
+            <div class="stat-front">
+              <span class="stat-val">54.6</span>
+              <span class="stat-unit">M km</span>
+              <span class="stat-label">Distance</span>
+            </div>
+            <div class="stat-back">
+              <p class="stat-desc">Minimum distance between Earth and Mars during the 2027 opposition window.</p>
+            </div>
+          </div>
+        </article>
+        <article class="stat-card" aria-label="Crew stat">
+          <div class="stat-card-inner">
+            <div class="stat-front">
+              <span class="stat-val">6</span>
+              <span class="stat-unit">crew</span>
+              <span class="stat-label">Astronauts</span>
+            </div>
+            <div class="stat-back">
+              <p class="stat-desc">Mission crew: 2 pilots, 1 geologist, 1 medic, 1 engineer, 1 botanist.</p>
+            </div>
+          </div>
+        </article>
+        <article class="stat-card" aria-label="Speed stat">
+          <div class="stat-card-inner">
+            <div class="stat-front">
+              <span class="stat-val">33,400</span>
+              <span class="stat-unit">km/h</span>
+              <span class="stat-label">Cruise Speed</span>
+            </div>
+            <div class="stat-back">
+              <p class="stat-desc">Peak interplanetary velocity achieved after Trans-Mars Injection burn.</p>
+            </div>
+          </div>
+        </article>
+        <article class="stat-card" aria-label="Payload stat">
+          <div class="stat-card-inner">
+            <div class="stat-front">
+              <span class="stat-val">100</span>
+              <span class="stat-unit">tonnes</span>
+              <span class="stat-label">Payload</span>
+            </div>
+            <div class="stat-back">
+              <p class="stat-desc">Habitat, ISRU equipment, rovers, supplies, and scientific instruments.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- Rocket visual -->
+    <div class="rocket-scene" aria-hidden="true">
+      <div class="rocket-svg-wrap">
+        <!-- Rocket SVG -->
+        <svg width="120" height="360" viewBox="0 0 120 360" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Body -->
+          <rect x="40" y="120" width="40" height="180" rx="4" fill="url(#bodyGrad)"/>
+          <!-- Nose cone -->
+          <path d="M60 20 L85 120 L35 120 Z" fill="url(#noseGrad)"/>
+          <!-- Windows -->
+          <circle cx="60" cy="155" r="10" fill="#00f5ff" opacity="0.6"/>
+          <circle cx="60" cy="155" r="6"  fill="#00f5ff" opacity="0.9"/>
+          <!-- Left fin -->
+          <path d="M40 260 L15 310 L40 295 Z" fill="url(#finGrad)"/>
+          <!-- Right fin -->
+          <path d="M80 260 L105 310 L80 295 Z" fill="url(#finGrad)"/>
+          <!-- Engine nozzle -->
+          <path d="M48 298 Q60 305 72 298 L76 320 Q60 326 44 320 Z" fill="#aaa"/>
+          <!-- VELOXAR text on body -->
+          <text x="60" y="230" text-anchor="middle" font-family="Orbitron,sans-serif" font-size="7" fill="rgba(255,255,255,0.4)" letter-spacing="1">VELOXAR</text>
+          <!-- Accent stripes -->
+          <rect x="40" y="140" width="40" height="3" fill="url(#stripeGrad)" opacity="0.8"/>
+          <rect x="40" y="200" width="40" height="2" fill="url(#stripeGrad)" opacity="0.5"/>
+          <!-- Side boosters -->
+          <rect x="18" y="220" width="18" height="70" rx="3" fill="url(#boosterGrad)"/>
+          <rect x="84" y="220" width="18" height="70" rx="3" fill="url(#boosterGrad)"/>
+          <defs>
+            <linearGradient id="bodyGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#b0b8cc"/>
+              <stop offset="50%" stop-color="#e0e8f5"/>
+              <stop offset="100%" stop-color="#8090a8"/>
+            </linearGradient>
+            <linearGradient id="noseGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#c0c8e0"/>
+              <stop offset="100%" stop-color="#7080a0"/>
+            </linearGradient>
+            <linearGradient id="finGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#8090b0"/>
+              <stop offset="100%" stop-color="#4050a0"/>
+            </linearGradient>
+            <linearGradient id="stripeGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#00f5ff"/>
+              <stop offset="100%" stop-color="#7b2fff"/>
+            </linearGradient>
+            <linearGradient id="boosterGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#90a0b8"/>
+              <stop offset="100%" stop-color="#606878"/>
+            </linearGradient>
+          </defs>
+        </svg>
+
+        <!-- Engine exhaust -->
+        <div class="exhaust" aria-hidden="true">
+          <div class="exhaust-flame"></div>
+          <div class="exhaust-flame"></div>
+          <div class="exhaust-flame"></div>
+        </div>
+      </div>
+
+      <!-- Earth in background -->
+      <div class="earth-orb" aria-label="Earth as seen from orbit"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════════════════════════════════
+     SECTION 3 — DEEP SPACE
+═════════════════════════════════════════════════ -->
+<section id="deep-space" class="section" aria-label="Deep Space Transit">
+  <div class="deep-content container">
+    <span class="section-label reveal">Phase 02 — Deep Space</span>
+    <h2 class="section-title reveal">
+      Crossing the <span>Cosmic Void</span>
+    </h2>
+    <p class="section-body text-center reveal" style="max-width:600px;margin:0 auto;">
+      For 259 days, Veloxar hurtles through interplanetary space at 33,400 km/h.
+      The crew contends with cosmic radiation, microgravity, and the psychological
+      weight of deep isolation — 300 million kilometres from home.
+    </p>
+
+    <!-- Warp speed interactive canvas – INTERACTIVE ELEMENT 2 -->
+    <div class="warp-container reveal" role="img" aria-label="Warp speed star tunnel visualisation">
+      <canvas id="warp-canvas"></canvas>
+      <div class="warp-overlay" aria-hidden="true">
+        <span class="warp-label">Current Velocity</span>
+        <span class="warp-speed-display">0.3c</span>
+      </div>
+    </div>
+    <button id="warp-btn" class="btn-warp reveal" aria-pressed="false" aria-label="Toggle warp drive">
+      ⚡ Engage Warp Drive
+    </button>
+
+    <!-- Asteroid belt -->
+    <div class="asteroid-band reveal" aria-label="Asteroid belt">
+      <div class="asteroid-strip" aria-hidden="true">
+        <!-- Duplicated for seamless loop -->
+        <div class="asteroid" style="width:28px;height:22px;animation-duration:5s"></div>
+        <div class="asteroid" style="width:16px;height:13px;animation-duration:7s;animation-delay:-2s"></div>
+        <div class="asteroid" style="width:38px;height:28px;animation-duration:9s;animation-delay:-4s"></div>
+        <div class="asteroid" style="width:20px;height:16px;animation-duration:6s;animation-delay:-1s"></div>
+        <div class="asteroid" style="width:44px;height:32px;animation-duration:11s;animation-delay:-6s"></div>
+        <div class="asteroid" style="width:12px;height:10px;animation-duration:4s;animation-delay:-3s"></div>
+        <div class="asteroid" style="width:30px;height:24px;animation-duration:8s;animation-delay:-5s"></div>
+        <div class="asteroid" style="width:18px;height:15px;animation-duration:6.5s;animation-delay:-2.5s"></div>
+        <div class="asteroid" style="width:50px;height:36px;animation-duration:12s;animation-delay:-7s"></div>
+        <div class="asteroid" style="width:22px;height:18px;animation-duration:7.5s;animation-delay:-4s"></div>
+        <!-- Duplicate for seamless loop -->
+        <div class="asteroid" style="width:28px;height:22px;animation-duration:5s"></div>
+        <div class="asteroid" style="width:16px;height:13px;animation-duration:7s;animation-delay:-2s"></div>
+        <div class="asteroid" style="width:38px;height:28px;animation-duration:9s;animation-delay:-4s"></div>
+        <div class="asteroid" style="width:20px;height:16px;animation-duration:6s;animation-delay:-1s"></div>
+        <div class="asteroid" style="width:44px;height:32px;animation-duration:11s;animation-delay:-6s"></div>
+        <div class="asteroid" style="width:12px;height:10px;animation-duration:4s;animation-delay:-3s"></div>
+        <div class="asteroid" style="width:30px;height:24px;animation-duration:8s;animation-delay:-5s"></div>
+        <div class="asteroid" style="width:18px;height:15px;animation-duration:6.5s;animation-delay:-2.5s"></div>
+        <div class="asteroid" style="width:50px;height:36px;animation-duration:12s;animation-delay:-7s"></div>
+        <div class="asteroid" style="width:22px;height:18px;animation-duration:7.5s;animation-delay:-4s"></div>
+      </div>
+    </div>
+
+    <!-- Space facts cards -->
+    <div class="space-facts" aria-label="Deep space facts">
+      <article class="fact-card">
+        <div class="fact-icon" aria-hidden="true"><i class="bi bi-radioactive"></i></div>
+        <h3 class="fact-title">Cosmic Radiation</h3>
+        <p class="fact-text">The crew absorbs ~1.84 mSv/day — 300× more than on Earth. Veloxar's polyethylene shielding reduces exposure by 40%.</p>
+      </article>
+      <article class="fact-card">
+        <div class="fact-icon" aria-hidden="true"><i class="bi bi-thermometer-half"></i></div>
+        <h3 class="fact-title">Temperature Extremes</h3>
+        <p class="fact-text">External hull temperatures swing from +120°C in sunlight to −180°C in shadow, cycling every 90 minutes.</p>
+      </article>
+      <article class="fact-card">
+        <div class="fact-icon" aria-hidden="true"><i class="bi bi-broadcast"></i></div>
+        <h3 class="fact-title">Signal Delay</h3>
+        <p class="fact-text">At maximum distance, radio signals take 24 minutes to reach Earth. Emergency decisions must be made autonomously.</p>
+      </article>
+      <article class="fact-card">
+        <div class="fact-icon" aria-hidden="true"><i class="bi bi-person-bounding-box"></i></div>
+        <h3 class="fact-title">Cognitive Isolation</h3>
+        <p class="fact-text">Psychological support systems, virtual reality environments, and structured social protocols maintain crew cohesion.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════════════════════════════════
+     SECTION 4 — MARS APPROACH
+═════════════════════════════════════════════════ -->
+<section id="mars-approach" class="section" aria-label="Mars Orbital Approach">
+  <div class="container text-center" style="display:flex;flex-direction:column;align-items:center;gap:3rem;">
+    <span class="section-label reveal">Phase 03 — Approach</span>
+    <h2 class="section-title reveal">
+      Mars Comes <span>Into View</span>
+    </h2>
+    <p class="section-body reveal" style="max-width:560px;margin:0 auto;">
+      After 259 days, a pale reddish dot swells into a world. Veloxar fires its
+      retro-thruster for 24 minutes, capturing into a 300×100 km elliptical orbit.
+      Drag the globe to explore Mars.
+    </p>
+
+    <!-- 3D Mars sphere – INTERACTIVE ELEMENT 3 -->
+    <div class="mars-system reveal" role="img" aria-label="Interactive 3D Mars sphere – drag to rotate">
+      <canvas id="mars-canvas"></canvas>
+      <div class="orbit-ring" aria-hidden="true"></div>
+      <div class="orb-ring-2" aria-hidden="true"></div>
+      <div class="mars-glow-ring" aria-hidden="true"></div>
+    </div>
+
+    <!-- Ribbon info -->
+    <div class="approach-ribbon">
+      <div class="ribbon-item">
+        <span class="ribbon-icon" aria-hidden="true"><i class="bi bi-globe-americas"></i></span>
+        <div class="ribbon-text">
+          <h4>Diameter</h4>
+          <p>6,779 km — roughly half of Earth's diameter, with similar land surface area.</p>
+        </div>
+      </div>
+      <div class="ribbon-item">
+        <span class="ribbon-icon" aria-hidden="true"><i class="bi bi-thermometer-sun"></i></span>
+        <div class="ribbon-text">
+          <h4>Surface Temp</h4>
+          <p>Ranges from −125°C at the poles to +20°C near the equator in summer.</p>
+        </div>
+      </div>
+      <div class="ribbon-item">
+        <span class="ribbon-icon" aria-hidden="true"><i class="bi bi-wind"></i></span>
+        <div class="ribbon-text">
+          <h4>Atmosphere</h4>
+          <p>95.3% CO₂, surface pressure just 0.6% of Earth's. Dust storms can engulf the entire planet.</p>
+        </div>
+      </div>
+      <div class="ribbon-item">
+        <span class="ribbon-icon" aria-hidden="true"><i class="bi bi-water"></i></span>
+        <div class="ribbon-text">
+          <h4>Olympus Mons</h4>
+          <p>The tallest volcano in the solar system — 21.9 km high, three times Everest.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════════════════════════════════
+     SECTION 5 — LANDING
+═════════════════════════════════════════════════ -->
+<section id="landing" class="section" aria-label="Mars Landing">
+  <div class="container" style="display:flex;flex-direction:column;align-items:center;gap:3rem;">
+    <span class="section-label reveal">Phase 04 — Entry & Descent</span>
+    <h2 class="section-title text-center reveal">
+      Seven Minutes<br/><span>of Terror</span>
+    </h2>
+    <p class="section-body text-center reveal" style="max-width:560px;margin:0 auto;">
+      Entry interface at 125 km altitude. The heat shield absorbs 2,000°C
+      of aerobraking. Parachutes deploy at Mach 1.7. Retro-thrusters fire
+      at 1.5 km altitude. Touchdown — T+7:12.
+    </p>
+
+    <!-- Landing scene -->
+    <div class="landing-scene reveal" role="img" aria-label="Mars landing sequence animation">
+      <div class="terrain" aria-hidden="true"></div>
+      <div class="lander" aria-hidden="true">
+        <!-- Lander SVG -->
+        <svg width="90" height="90" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Main body -->
+          <rect x="27" y="28" width="36" height="28" rx="4" fill="#a0b0c8" stroke="#c0d0e0" stroke-width="1"/>
+          <!-- Solar panels -->
+          <rect x="2"  y="34" width="22" height="8" rx="2" fill="#1a3a6a" stroke="#2060b0" stroke-width="0.8"/>
+          <rect x="66" y="34" width="22" height="8" rx="2" fill="#1a3a6a" stroke="#2060b0" stroke-width="0.8"/>
+          <line x1="24" y1="38" x2="27" y2="38" stroke="#c0d0e0" stroke-width="1.5"/>
+          <line x1="63" y1="38" x2="66" y2="38" stroke="#c0d0e0" stroke-width="1.5"/>
+          <!-- Instruments -->
+          <circle cx="45" cy="26" r="6" fill="#202840" stroke="#4060a0" stroke-width="1"/>
+          <circle cx="45" cy="26" r="3" fill="#00f5ff" opacity="0.7"/>
+          <!-- Legs -->
+          <line x1="33" y1="56" x2="22" y2="76" stroke="#8090a8" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="57" y1="56" x2="68" y2="76" stroke="#8090a8" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="45" y1="56" x2="45" y2="76" stroke="#8090a8" stroke-width="2" stroke-linecap="round"/>
+          <!-- Foot pads -->
+          <ellipse cx="22" cy="77" rx="6" ry="3" fill="#708090"/>
+          <ellipse cx="68" cy="77" rx="6" ry="3" fill="#708090"/>
+          <ellipse cx="45" cy="77" rx="5" ry="2.5" fill="#708090"/>
+          <!-- Thruster glow -->
+          <ellipse cx="45" cy="58" rx="8" ry="4" fill="url(#thrustGlow)" opacity="0.8"/>
+          <defs>
+            <radialGradient id="thrustGlow">
+              <stop offset="0%" stop-color="#ffffff"/>
+              <stop offset="40%" stop-color="#00f5ff"/>
+              <stop offset="100%" stop-color="transparent"/>
+            </radialGradient>
+          </defs>
+        </svg>
+      </div>
+      <div class="dust-cloud" aria-hidden="true">
+        <div class="dust-puff"></div>
+        <div class="dust-puff"></div>
+        <div class="dust-puff"></div>
+      </div>
+    </div>
+
+    <!-- Telemetry readouts -->
+    <div class="landing-telemetry reveal" aria-label="Landing telemetry data">
+      <div class="telemetry-item">
+        <span class="tele-label">Altitude</span>
+        <span class="tele-val" data-target="0" data-suffix=" m" data-int="true">—</span>
+        <div class="tele-bar"><div class="tele-fill" data-width="100" style="width:0%"></div></div>
+      </div>
+      <div class="telemetry-item">
+        <span class="tele-label">Descent Rate</span>
+        <span class="tele-val" data-target="0.8" data-suffix=" m/s">—</span>
+        <div class="tele-bar"><div class="tele-fill" data-width="8" style="width:0%"></div></div>
+      </div>
+      <div class="telemetry-item">
+        <span class="tele-label">Hull Temp</span>
+        <span class="tele-val" data-target="24.3" data-suffix="°C">—</span>
+        <div class="tele-bar"><div class="tele-fill" data-width="45" style="width:0%"></div></div>
+      </div>
+      <div class="telemetry-item">
+        <span class="tele-label">Fuel Remaining</span>
+        <span class="tele-val" data-target="12.4" data-suffix="%">—</span>
+        <div class="tele-bar"><div class="tele-fill" data-width="12" style="width:0%" style="background:linear-gradient(90deg,#ff7b35,#c1440e)"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════════════════════════════════
+     SECTION 6 — EXPLORATION
+═════════════════════════════════════════════════ -->
+<section id="exploration" class="section" aria-label="Mars Surface Exploration">
+  <div class="container" style="display:flex;flex-direction:column;align-items:center;gap:3rem;">
+    <span class="section-label reveal">Phase 05 — Exploration</span>
+    <h2 class="section-title text-center reveal">
+      Walking on the <span>Red Planet</span>
+    </h2>
+    <p class="section-body text-center reveal" style="max-width:560px;margin:0 auto;">
+      Touchdown confirmed at Jezero Crater. Six crew members step onto the
+      ancient lakebed — the first humans on another world. Click the hotspots
+      to uncover what we find.
+    </p>
+
+    <!-- Interactive Mars surface map – INTERACTIVE ELEMENT 3 -->
+    <div class="mars-surface-map reveal" role="region" aria-label="Mars surface map with exploration hotspots">
+      <div class="surface-noise" aria-hidden="true"></div>
+      <!-- craters -->
+      <div class="crater crater-1" aria-hidden="true"></div>
+      <div class="crater crater-2" aria-hidden="true"></div>
+      <div class="crater crater-3" aria-hidden="true"></div>
+
+      <!-- Hotspot 1 – Base Camp -->
+      <div class="hotspot" style="left:20%;top:40%;" aria-label="Base Camp Alpha hotspot" role="button" tabindex="0">
+        <div class="hotspot-ring" aria-hidden="true"></div>
+        <div class="hotspot-popup" role="tooltip">
+          <p class="popup-title"><i class="bi bi-house-door"></i> Base Camp Alpha</p>
+          <p class="popup-body">Pressurised habitat for 6 crew. ISRU unit extracts 5 kg/day of O₂ from CO₂.</p>
+        </div>
+      </div>
+
+      <!-- Hotspot 2 – Ancient River Delta -->
+      <div class="hotspot" style="left:48%;top:25%;" aria-label="Ancient River Delta hotspot" role="button" tabindex="0">
+        <div class="hotspot-ring" aria-hidden="true"></div>
+        <div class="hotspot-popup" role="tooltip">
+          <p class="popup-title"><i class="bi bi-water"></i> Ancient River Delta</p>
+          <p class="popup-body">Sedimentary layers preserve 3.5-billion-year-old biosignatures. First microfossil candidates identified.</p>
+        </div>
+      </div>
+
+      <!-- Hotspot 3 – Subsurface Ice -->
+      <div class="hotspot" style="left:72%;top:55%;" aria-label="Subsurface Ice Deposit hotspot" role="button" tabindex="0">
+        <div class="hotspot-ring" aria-hidden="true"></div>
+        <div class="hotspot-popup" role="tooltip">
+          <p class="popup-title"><i class="bi bi-snow"></i> Subsurface Ice</p>
+          <p class="popup-body">Ground-penetrating radar confirms 4-metre deep ice deposit. Potential water source for extended missions.</p>
+        </div>
+      </div>
+
+      <!-- Hotspot 4 – Olympus Vista -->
+      <div class="hotspot" style="left:85%;top:30%;" aria-label="Olympus Mons Vista hotspot" role="button" tabindex="0">
+        <div class="hotspot-ring" aria-hidden="true"></div>
+        <div class="hotspot-popup" role="tooltip" style="right:0;left:auto;transform:translateX(0) translateY(8px);">
+          <p class="popup-title"><i class="bi bi-cone-striped"></i> Olympus Vista</p>
+          <p class="popup-body">Distant view of Olympus Mons caldera, 21.9 km above the plain — the solar system's tallest mountain.</p>
+        </div>
+      </div>
+
+      <!-- Hotspot 5 – Dust Devil -->
+      <div class="hotspot" style="left:37%;top:65%;" aria-label="Dust Devil Formation hotspot" role="button" tabindex="0">
+        <div class="hotspot-ring" aria-hidden="true"></div>
+        <div class="hotspot-popup" role="tooltip">
+          <p class="popup-title"><i class="bi bi-tornado"></i> Dust Devil</p>
+          <p class="popup-body">Martian dust devils 10× taller than Earth's. Solar panel cleaning observed after a direct pass.</p>
+        </div>
+      </div>
+
+      <!-- Rover SVG on surface -->
+      <div style="position:absolute;bottom:12%;left:50%;transform:translateX(-50%);animation:float-gentle 3s ease-in-out infinite;" aria-hidden="true">
+        <svg width="120" height="60" viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="16" width="80" height="26" rx="4" fill="#c08040" stroke="#e0a060" stroke-width="1.2"/>
+          <!-- Mast -->
+          <rect x="56" y="4" width="4" height="14" fill="#a06030" rx="1"/>
+          <rect x="50" y="4" width="16" height="5" rx="2" fill="#d0a070"/>
+          <!-- Solar panels -->
+          <rect x="5"  y="18" width="14" height="22" rx="2" fill="#1a3a6a" stroke="#2060b0" stroke-width="0.8"/>
+          <rect x="101" y="18" width="14" height="22" rx="2" fill="#1a3a6a" stroke="#2060b0" stroke-width="0.8"/>
+          <!-- Wheels -->
+          <circle cx="32" cy="44" r="9" fill="#3a3030" stroke="#605050" stroke-width="1.5"/>
+          <circle cx="60" cy="44" r="9" fill="#3a3030" stroke="#605050" stroke-width="1.5"/>
+          <circle cx="88" cy="44" r="9" fill="#3a3030" stroke="#605050" stroke-width="1.5"/>
+          <circle cx="32" cy="44" r="4" fill="#505050"/>
+          <circle cx="60" cy="44" r="4" fill="#505050"/>
+          <circle cx="88" cy="44" r="4" fill="#505050"/>
+          <!-- Arm -->
+          <line x1="90" y1="28" x2="110" y2="40" stroke="#b07040" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="112" cy="41" r="3" fill="#d0a060"/>
+          <!-- Antenna -->
+          <line x1="30" y1="16" x2="25" y2="6" stroke="#a06030" stroke-width="1.5"/>
+          <circle cx="25" cy="5" r="2.5" fill="#e0b070"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Rover specs -->
+    <div class="rover-strip">
+      <article class="rover-card">
+        <h3>VELOXAR-1 ROVER</h3>
+        <div class="rover-spec">
+          <span class="rover-spec-label">Mass</span>
+          <span class="rover-spec-val">1,025 kg</span>
+        </div>
+        <div class="rover-spec">
+          <span class="rover-spec-label">Max Speed</span>
+          <span class="rover-spec-val">152 m/h</span>
+        </div>
+        <div class="rover-spec">
+          <span class="rover-spec-label">Power</span>
+          <span class="rover-spec-val">110 W (RTG)</span>
+        </div>
+        <div class="rover-spec">
+          <span class="rover-spec-label">Range</span>
+          <span class="rover-spec-val">~500 km</span>
+        </div>
+        <div class="rover-spec">
+          <span class="rover-spec-label">Instruments</span>
+          <span class="rover-spec-val">14 sensors</span>
+        </div>
+      </article>
+      <article class="rover-card">
+        <h3>MISSION OBJECTIVES</h3>
+        <div class="rover-spec">
+          <span class="rover-spec-label">Duration</span>
+          <span class="rover-spec-val">500+ sols</span>
+        </div>
+        <div class="rover-spec">
+          <span class="rover-spec-label">Samples</span>
+          <span class="rover-spec-val">43 cached</span>
+        </div>
+        <div class="rover-spec">
+          <span class="rover-spec-label">O₂ Produced</span>
+          <span class="rover-spec-val">8.4 kg</span>
+        </div>
+        <div class="rover-spec">
+          <span class="rover-spec-label">Biosignatures</span>
+          <span class="rover-spec-val">2 candidates</span>
+        </div>
+        <div class="rover-spec">
+          <span class="rover-spec-label">Status</span>
+          <span class="rover-spec-val" style="color:#28c840;">ACTIVE</span>
+        </div>
+      </article>
+    </div>
+
+    <!-- Mission log terminal -->
+    <div class="mission-log reveal" role="log" aria-label="Mission communication log" aria-live="polite">
+      <div class="log-header">
+        <span class="log-dot" aria-hidden="true"></span>
+        <span class="log-dot" aria-hidden="true"></span>
+        <span class="log-dot" aria-hidden="true"></span>
+        <span class="log-title">VELOXAR MISSION CONTROL — LIVE FEED</span>
+      </div>
+      <div class="log-body">
+        <span class="log-line"><span class="log-time">T+259:06:14</span> <span class="log-text-success">✓ Touchdown confirmed — Jezero Crater, Mars</span></span>
+        <span class="log-line"><span class="log-time">T+259:07:02</span> <span class="log-text-info">↓ Deploying landing struts. All systems nominal.</span></span>
+        <span class="log-line"><span class="log-time">T+259:08:44</span> <span class="log-text-success">✓ Habitat pressurisation complete — 101 kPa</span></span>
+        <span class="log-line"><span class="log-time">T+259:12:31</span> <span class="log-text-warn">⚠ Dust storm advisory — wind 18 m/s NNE</span></span>
+        <span class="log-line"><span class="log-time">T+259:14:00</span> <span class="log-text-info">→ EVA-1 commencing. CMDR Chen on surface.</span></span>
+        <span class="log-line"><span class="log-time">T+259:16:22</span> <span class="log-text-success">✓ First human steps on Martian soil confirmed.</span></span>
+        <span class="log-line"><span class="log-time">T+259:18:05</span> <span class="log-text-info">↑ VELOXAR-1 rover deployed. Nominal ops.</span></span>
+        <span class="log-line"><span class="log-time">T+259:23:47</span> <span class="log-text-warn">⚠ Biosignature anomaly in sample VX-007</span></span>
+        <span class="log-line"><span class="log-time">T+260:01:12</span> <span class="log-text-success">✓ ISRU producing O₂ at 5.1 kg/day — on target</span></span>
+        <span class="log-line"><span class="log-time">T+260:04:55</span> <span class="log-text-info">→ Mission log broadcasting. Earth uplink nominal<span class="log-cursor" aria-hidden="true"></span></span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════════════════════════════════
+     SECTION 7 — HISTORICAL MISSIONS
+═════════════════════════════════════════════════ -->
+<section id="missions" class="section" aria-label="Historical Mars Missions">
+  <div class="container" style="display:flex;flex-direction:column;align-items:center;gap:4rem;padding-top:6rem;padding-bottom:6rem;">
+    <div class="text-center" style="max-width:700px;">
+      <span class="section-label reveal">Phase 06 — Legacy</span>
+      <h2 class="section-title reveal">
+        Pioneers of the <span>Red Planet</span>
+      </h2>
+      <p class="section-body reveal" style="margin:1rem auto 0;">
+        Before Veloxar, humanity sent robotic emissaries to pave the way. Explore the monumental achievements of India's ISRO and NASA that unlocked the secrets of Mars.
+      </p>
+    </div>
+
+    <div class="missions-grid reveal">
+      <!-- ISRO MOM -->
+      <article class="mission-showcase isro-mission">
+        <div class="mission-content">
+          <div class="agency-badge"><i class="bi bi-rocket-takeoff"></i> ISRO</div>
+          <h3 class="mission-name">Mangalyaan (MOM)</h3>
+          <p class="mission-dates">Launched: Nov 2013 | Arrived: Sep 2014</p>
+          <p class="mission-desc">
+            The Mars Orbiter Mission marked India's first interplanetary venture. Achieving orbit on its maiden attempt—a global first—MOM exceeded its 6-month designed lifespan by orbiting for nearly 8 years, mapping Martian surface features and morphology with its multi-color camera.
+          </p>
+          <ul class="mission-achievements">
+            <li><i class="bi bi-check2-circle"></i> Most cost-effective Mars mission (~$74M)</li>
+            <li><i class="bi bi-check2-circle"></i> First Asian nation to reach Mars orbit</li>
+            <li><i class="bi bi-check2-circle"></i> Captured full-disc images of Mars</li>
+          </ul>
+        </div>
+        <div class="mission-visual">
+          <div class="satellite-model isro-sat" aria-hidden="true">
+            <div class="sat-body"></div>
+            <div class="sat-panel panel-left"></div>
+            <div class="sat-panel panel-right"></div>
+            <div class="sat-dish"></div>
+          </div>
+          <div class="mission-glow" aria-hidden="true"></div>
+        </div>
+      </article>
+
+      <!-- NASA Perseverance & Curiosity -->
+      <article class="mission-showcase nasa-mission layout-reverse">
+        <div class="mission-content">
+          <div class="agency-badge"><i class="bi bi-stars"></i> NASA</div>
+          <h3 class="mission-name">Perseverance &amp; Ingenuity</h3>
+          <p class="mission-dates">Landed: Feb 2021 (Mars 2020)</p>
+          <p class="mission-desc">
+            Designed to seek signs of ancient microbial life, Perseverance roves Jezero Crater gathering rock and soil samples. It was accompanied by the Ingenuity Mars Helicopter, which completed 72 historic flights, proving powered, controlled flight on another planet.
+          </p>
+          <ul class="mission-achievements">
+            <li><i class="bi bi-check2-circle"></i> First powered flight on Mars (Ingenuity)</li>
+            <li><i class="bi bi-check2-circle"></i> Extracted oxygen from Martian CO₂ (MOXIE)</li>
+            <li><i class="bi bi-check2-circle"></i> Caching samples for future Earth return</li>
+          </ul>
+        </div>
+        <div class="mission-visual">
+          <div class="rover-model nasa-rov" aria-hidden="true">
+            <div class="heli-blade"></div>
+            <div class="heli-body"></div>
+            <div class="rov-chassis"></div>
+            <div class="rov-wheel w1"></div>
+            <div class="rov-wheel w2"></div>
+            <div class="rov-wheel w3"></div>
+            <div class="rov-mast"></div>
+          </div>
+          <div class="mission-glow alt" aria-hidden="true"></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════════════════════════════════
+     SECTION 8 — ANALYTICS DASHBOARD
+═════════════════════════════════════════════════ -->
+<section id="analytics" class="section" aria-label="Mission Analytics Dashboard">
+  <div class="container" style="display:flex;flex-direction:column;align-items:center;gap:3rem;padding-top:6rem;padding-bottom:10rem;">
+    <div class="text-center" style="max-width:700px;">
+      <span class="section-label reveal">Phase 07 — Data</span>
+      <h2 class="section-title reveal">
+        Mission <span>Analytics</span>
+      </h2>
+      <p class="section-body reveal" style="margin:1rem auto 0;">
+        Live telemetry and statistical overview of the Veloxar mission parameters versus historical benchmarks.
+      </p>
+    </div>
+
+    <!-- Dashboard UI -->
+    <div class="dash-grid reveal">
+      <!-- Chart Card 1 -->
+      <div class="dash-card">
+        <div class="dash-header">
+          <h4><i class="bi bi-graph-up-arrow"></i> Atmospheric Composition (Jezero Crater)</h4>
+        </div>
+        <div class="dash-body flex-center">
+          <div class="donut-chart" aria-label="Atmosphere composition chart">
+            <div class="donut-hole">
+              <span class="donut-total">95.3%</span>
+              <span class="donut-label">CO₂</span>
+            </div>
+          </div>
+          <div class="chart-legend">
+            <div class="legend-item"><span class="swatch" style="background:#c1440e;"></span> Carbon Dioxide (95.3%)</div>
+            <div class="legend-item"><span class="swatch" style="background:#00f5ff;"></span> Nitrogen (2.6%)</div>
+            <div class="legend-item"><span class="swatch" style="background:#7b2fff;"></span> Argon (1.9%)</div>
+            <div class="legend-item"><span class="swatch" style="background:#fca311;"></span> Oxygen/Other (0.16%)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chart Card 2 -->
+      <div class="dash-card">
+        <div class="dash-header">
+          <h4><i class="bi bi-bar-chart"></i> Transit Time Comparison</h4>
+        </div>
+        <div class="dash-body">
+          <div class="bar-chart">
+            <div class="bar-row">
+              <span class="bar-label">Viking 1 (1975)</span>
+              <div class="bar-wrap"><div class="bar-fill" data-w="90" style="background:#6b7a96;"></div></div>
+              <span class="bar-val">304 Days</span>
+            </div>
+            <div class="bar-row">
+              <span class="bar-label">MOM (2013)</span>
+              <div class="bar-wrap"><div class="bar-fill" data-w="85" style="background:#fca311;"></div></div>
+              <span class="bar-val">298 Days</span>
+            </div>
+            <div class="bar-row">
+              <span class="bar-label">Perseverance (2020)</span>
+              <div class="bar-wrap"><div class="bar-fill" data-w="60" style="background:#7b2fff;"></div></div>
+              <span class="bar-val">203 Days</span>
+            </div>
+            <div class="bar-row">
+              <span class="bar-label">Veloxar (2027)</span>
+              <div class="bar-wrap"><div class="bar-fill" data-w="75" style="background:var(--clr-cyan);"></div></div>
+              <span class="bar-val">259 Days</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Live Stats Ticker -->
+      <div class="dash-card dash-span">
+        <div class="dash-header">
+          <h4><i class="bi bi-activity"></i> Habitat Subsystem Live Telemetry</h4>
+        </div>
+        <div class="dash-stats">
+          <div class="d-stat">
+            <span class="ds-lbl">Internal Temp</span>
+            <span class="ds-val">22.4 <small>°C</small></span>
+          </div>
+          <div class="d-stat">
+            <span class="ds-lbl">Pressure</span>
+            <span class="ds-val">101.2 <small>kPa</small></span>
+          </div>
+          <div class="d-stat">
+            <span class="ds-lbl">O₂ Reserve</span>
+            <span class="ds-val">94.8 <small>%</small></span>
+          </div>
+          <div class="d-stat">
+            <span class="ds-lbl">Power Load</span>
+            <span class="ds-val">840 <small>W</small></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Footer coda -->
+  <footer style="margin-top:4rem;text-align:center;border-top:1px solid rgba(255,255,255,0.06);padding-top:3rem;width:100%;" role="contentinfo">
+    <div class="loader-logo" style="font-size:1.5rem;margin-bottom:1rem;">VELOXAR</div>
+    <p style="font-family:var(--font-mono);font-size:0.7rem;color:var(--clr-text-dim);letter-spacing:0.15em;">
+      MISSION LOG · MARS YEAR 01 · SOL 260 · ALL SYSTEMS NOMINAL
+    </p>
+    <p style="font-size:0.75rem;color:var(--clr-text-dim);margin-top:1rem;opacity:0.5;">
+      An interactive experience built in HTML, CSS, Three.js &amp; GSAP<br/>
+      © 2027 Veloxar Space Systems (Enhanced Edition)
+    </p>
+  </footer>
+</section>
+
+<!-- ─────────────────────────────────────────────────
+     SCRIPTS
+───────────────────────────────────────────────── -->
+<!-- Three.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" crossorigin="anonymous"></script>
+<!-- GSAP + ScrollTrigger -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" crossorigin="anonymous"></script>
+<!-- Main script -->
+<script src="main.js"></script>
+<script src="extras.js"></script>
+</body>
+</html>
