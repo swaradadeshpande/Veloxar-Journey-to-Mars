@@ -1197,3 +1197,34 @@ nav {
   }
   .exhaust { display: none; }
 }
+
+/* --- Magnetic Button Area --- */
+.mag-btn {
+    display: inline-block;
+    transition: transform 0.2s ease-out;
+    cursor: none; /* Let the custom cursor lead */
+}
+
+/* --- Scramble Text Styling --- */
+.scramble {
+    font-family: var(--font-head);
+    text-transform: uppercase;
+}
+
+/* --- HUD Progress Bar --- */
+.mission-progress {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 200px;
+    background: rgba(255,255,255,0.1);
+    z-index: 1000;
+}
+.progress-fill {
+    width: 100%;
+    height: 0%;
+    background: var(--clr-cyan);
+    box-shadow: 0 0 10px var(--clr-cyan);
+}
