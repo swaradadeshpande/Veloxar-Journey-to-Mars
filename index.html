@@ -48,18 +48,23 @@
 <nav role="navigation" aria-label="Main navigation">
   <a href="#hero" class="nav-logo" aria-label="Veloxar home">VELOXAR</a>
   <ul class="nav-links" role="list">
-    <li><a href="#hero">Home</a></li>
-    <li><a href="#launch">Launch</a></li>
-    <li><a href="#deep-space">Deep Space</a></li>
-    <li><a href="#mars-approach">Mars</a></li>
-    <li><a href="#landing">Landing</a></li>
-    <li><a href="#exploration">Explore</a></li>
-    <li><a href="#missions">Missions</a></li>
-    <li><a href="#analytics">Analytics</a></li>
+    <li><a href="#hero"><i class="bi bi-house-door"></i> Home</a></li>
+    <li><a href="#launch"><i class="bi bi-rocket-takeoff"></i> Launch</a></li>
+    <li><a href="#deep-space"><i class="bi bi-stars"></i> Deep Space</a></li>
+    <li><a href="#mars-approach"><i class="bi bi-globe-americas"></i> Mars</a></li>
+    <li><a href="#landing"><i class="bi bi-geo-alt"></i> Landing</a></li>
+    <li><a href="#exploration"><i class="bi bi-compass"></i> Explore</a></li>
+    <li><a href="#missions"><i class="bi bi-clock-history"></i> Missions</a></li>
+    <li><a href="#analytics"><i class="bi bi-bar-chart-fill"></i> Analytics</a></li>
   </ul>
-  <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
+  <div class="nav-controls" style="display: flex; gap: 1rem; align-items: center;">
+    <button id="sound-btn" class="btn-sound" aria-label="Toggle sound" style="background:transparent; border:none; color:var(--clr-cyan); cursor:pointer; font-size:1.2rem;">
+      <i class="bi bi-volume-mute"></i>
+    </button>
+    <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
 
@@ -761,19 +766,8 @@
         <div class="dash-header">
           <h4><i class="bi bi-graph-up-arrow"></i> Atmospheric Composition (Jezero Crater)</h4>
         </div>
-        <div class="dash-body flex-center">
-          <div class="donut-chart" aria-label="Atmosphere composition chart">
-            <div class="donut-hole">
-              <span class="donut-total">95.3%</span>
-              <span class="donut-label">CO₂</span>
-            </div>
-          </div>
-          <div class="chart-legend">
-            <div class="legend-item"><span class="swatch" style="background:#c1440e;"></span> Carbon Dioxide (95.3%)</div>
-            <div class="legend-item"><span class="swatch" style="background:#00f5ff;"></span> Nitrogen (2.6%)</div>
-            <div class="legend-item"><span class="swatch" style="background:#7b2fff;"></span> Argon (1.9%)</div>
-            <div class="legend-item"><span class="swatch" style="background:#fca311;"></span> Oxygen/Other (0.16%)</div>
-          </div>
+        <div class="dash-body" style="position: relative; height: 250px; display: flex; justify-content: center; align-items: center;">
+          <canvas id="atm-chart"></canvas>
         </div>
       </div>
 
@@ -782,29 +776,8 @@
         <div class="dash-header">
           <h4><i class="bi bi-bar-chart"></i> Transit Time Comparison</h4>
         </div>
-        <div class="dash-body">
-          <div class="bar-chart">
-            <div class="bar-row">
-              <span class="bar-label">Viking 1 (1975)</span>
-              <div class="bar-wrap"><div class="bar-fill" data-w="90" style="background:#6b7a96;"></div></div>
-              <span class="bar-val">304 Days</span>
-            </div>
-            <div class="bar-row">
-              <span class="bar-label">MOM (2013)</span>
-              <div class="bar-wrap"><div class="bar-fill" data-w="85" style="background:#fca311;"></div></div>
-              <span class="bar-val">298 Days</span>
-            </div>
-            <div class="bar-row">
-              <span class="bar-label">Perseverance (2020)</span>
-              <div class="bar-wrap"><div class="bar-fill" data-w="60" style="background:#7b2fff;"></div></div>
-              <span class="bar-val">203 Days</span>
-            </div>
-            <div class="bar-row">
-              <span class="bar-label">Veloxar (2027)</span>
-              <div class="bar-wrap"><div class="bar-fill" data-w="75" style="background:var(--clr-cyan);"></div></div>
-              <span class="bar-val">259 Days</span>
-            </div>
-          </div>
+        <div class="dash-body" style="position: relative; height: 250px; display: flex; justify-content: center; align-items: center;">
+          <canvas id="transit-chart"></canvas>
         </div>
       </div>
       
@@ -834,19 +807,20 @@
       </div>
     </div>
   </div>
-  
-  <!-- Footer coda -->
-  <footer style="margin-top:4rem;text-align:center;border-top:1px solid rgba(255,255,255,0.06);padding-top:3rem;width:100%;" role="contentinfo">
-    <div class="loader-logo" style="font-size:1.5rem;margin-bottom:1rem;">VELOXAR</div>
-    <p style="font-family:var(--font-mono);font-size:0.7rem;color:var(--clr-text-dim);letter-spacing:0.15em;">
-      MISSION LOG · MARS YEAR 01 · SOL 260 · ALL SYSTEMS NOMINAL
-    </p>
-    <p style="font-size:0.75rem;color:var(--clr-text-dim);margin-top:1rem;opacity:0.5;">
-      An interactive experience built in HTML, CSS, Three.js &amp; GSAP<br/>
-      © 2027 Veloxar Space Systems (Enhanced Edition)
-    </p>
-  </footer>
+  </div>
 </section>
+
+<!-- Footer coda -->
+<footer style="margin-top:2rem;text-align:center;border-top:1px solid rgba(255,255,255,0.06);padding-top:3rem;padding-bottom:2rem;width:100%;" role="contentinfo">
+  <div class="loader-logo" style="font-size:1.5rem;margin-bottom:1rem;">VELOXAR</div>
+  <p style="font-family:var(--font-mono);font-size:0.7rem;color:var(--clr-text-dim);letter-spacing:0.15em;">
+    MISSION LOG · MARS YEAR 01 · SOL 260 · ALL SYSTEMS NOMINAL
+  </p>
+  <p style="font-size:0.75rem;color:var(--clr-text-dim);margin-top:1rem;opacity:0.5;">
+    An interactive experience built in HTML, CSS, Three.js &amp; GSAP<br/>
+    © 2027 Veloxar Space Systems (Enhanced Edition)
+  </p>
+</footer>
 
 <!-- ─────────────────────────────────────────────────
      SCRIPTS
@@ -856,6 +830,12 @@
 <!-- GSAP + ScrollTrigger -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" crossorigin="anonymous"></script>
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Vanilla Tilt -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+<!-- Audio -->
+<audio id="bg-audio" loop src="https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3?filename=space-ambience-56265.mp3"></audio>
 <!-- Main script -->
 <script src="main.js"></script>
 <script src="extras.js"></script>
