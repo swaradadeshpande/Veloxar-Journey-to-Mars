@@ -1228,3 +1228,28 @@ nav {
     background: var(--clr-cyan);
     box-shadow: 0 0 10px var(--clr-cyan);
 }
+
+/* This ensures the horizontal line itself is centered within its parent */
+.section-line {
+    width: 80px;
+    height: 4px;
+    background: var(--clr-cyan);
+    margin: 1.5rem auto; /* The 'auto' on left/right is the secret to centering */
+    border-radius: 2px;
+    box-shadow: 0 0 15px var(--clr-cyan);
+}
+
+/* Ensure the container is a flex column to center its children */
+.flex-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.section-label {
+  display: block;
+  width: fit-content;
+  margin: 0 auto;   /* THIS centers it horizontally */
+  text-align: center;
+}
